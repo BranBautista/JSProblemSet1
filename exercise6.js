@@ -1,3 +1,6 @@
+//I decided to construct a Binary Tree
+//with the two options: add nodes and search for nodes.
+
 class Node {
     constructor (value) {
         this.value = value;
@@ -63,13 +66,17 @@ class BinaryTree {
     }
 }
 
-const bts = new BinaryTree();
+const binaryTree = new BinaryTree();
 
-bts.addNode(10);
-bts.addNode(5);
-bts.addNode(15);
-console.log(bts)
+//Here I will add some nodes to the tree
+binaryTree.addNode(10);
+binaryTree.addNode(5);
+binaryTree.addNode(15);
 
-console.log(bts.root)
+//I will display the structure of the tree
+console.log(binaryTree);
 
-console.log(bts.searchNode(bts.root,25))
+
+//Here I will search for a specific node. 
+console.log(binaryTree.searchNode(binaryTree.root,25))
+console.log(binaryTree.searchNode(binaryTree.root,15))
