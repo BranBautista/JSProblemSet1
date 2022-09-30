@@ -67,19 +67,3 @@ function sortArray (array,customSort){
 }
 
 console.log(sortArray(wordsArray,'consonant-descending'));
-
-
-// console.log('ABC'.charCodeAt(2))
-
-// console.log('reaA'.toLowerCase())
-
-
-//let charCodeBef = inputArray[0].charCodeAt(0);
-//for (let i = 1; i < inputArray.length; i++){
-    //let wordLowerCase = inputArray[i].toLowerCase();
-        // let charCodeAft = wordLowerCase.charCodeAt(0);
-        // if (charCodeAft < charCodeBef){
-//     inputArray[i] = inputArray[i].toLowerCase();
-// }
-
-
