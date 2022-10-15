@@ -1,30 +1,30 @@
-objA = {
+let objA = {
     propA1 : 1,
     propA2 : 2,
     propA3 : 3
 }
 
-objB = {
+let objB = {
     propB1 : 1,
     propB2 : 2,
     propB3 : 3
 }
 
-function copyProp(object1, object2, array){
-    let arrayPropertiesObj2 = Object.keys(object2);
-    if (typeof array === "undefined"){
+function copyProp(objectCopyTo, objectCopyFrom, arrayPropToCopy){
+    let arrayPropertiesObj2 = Object.keys(objectCopyFrom);
+    if (typeof arrayPropToCopy === "undefined"){
         for (let i = 0 ; i < arrayPropertiesObj2.length ; i++){
-            object1[arrayPropertiesObj2[i]] = object2[arrayPropertiesObj2[i]];
+            objectCopyTo[arrayPropertiesObj2[i]] = objectCopyFrom[arrayPropertiesObj2[i]];
         }
     }
     else {
-        let arraySpecificProp = array;
+        let arraySpecificProp = arrayPropToCopy;
         for (let i = 0 ; i < arraySpecificProp.length ; i++){
-            object1[arraySpecificProp[i]] = object2[arraySpecificProp[i]];
+            objectCopyTo[arraySpecificProp[i]] = objectCopyFrom[arraySpecificProp[i]];
         }
     }
 }
 
-copyProp(objA,objB,['propB1','propB2'])
+copyProp(objA,objB,['propB1','propB2']);
 
-console.log(objA)
+console.log(objA);
