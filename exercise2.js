@@ -1,21 +1,25 @@
-var counter = 0;
+let counter = 0;
+
+function sum (a,b){
+    counter = counter + 1;
+    return a + b;
+}
 
 function printHello (){
     counter = counter + 1;
-    console.log( "Hello everybody!")
+    return "Hi, how are you?";
 }
 
-function limitFunc (fn,num){
+function limitFunc (fn,num,...args){
     return function (){
         if (counter == num) {
             return;
         }
-        fn();
+        console.log(fn(...args));
     }
 }
 
-
-var limited = limitFunc(printHello,2);
+var limited = limitFunc(sum,2,3,5);
 
 limited()
 limited()
