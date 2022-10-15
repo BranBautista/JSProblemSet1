@@ -1,5 +1,5 @@
 function counter(string){
-    let vowels = ["a","e","i","o","u","A","E","I","O","U"];
+    let regexVowels = /[aeiou]/gi;
     let numbers = ['0','1','2','3','4','5','6','7','8','9'];
     let counter = 0;
     if (typeof string === 'number' || numbers.indexOf(string.charAt(0)) != -1){
@@ -7,17 +7,10 @@ function counter(string){
         if (typeof string === 'string'){
             number = Number(string);
         }
-        else {
-            number = string;
-        }
         counter = Math.floor(Math.log10(number)) + 1;
     }
     else {
-        for (let i=0; i<string.length ; i++){
-            if(vowels.indexOf(string.charAt(i))!=-1){
-                counter = counter + 1;
-            }
-        }
+        counter = string.match(regexVowels).length;
     }
     return counter;
 }
