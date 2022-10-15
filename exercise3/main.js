@@ -6,6 +6,4 @@ window.p.changeStyle2 = function (colorParagraph = 'yellowgreen', fontSize = '2r
     this.style.backgroundColor = backgroundColor;
 }
 
-with(window.p){
-    changeStyle2();
-}
+window.p.changeStyle2();
