@@ -1,4 +1,11 @@
-let wordsArray = ['hello','sun' ,'hi' ,'nice', 'cool', 'Accompany', 'background', 'candidate', 'dialogue', 'Essential'];
+let wordsArray = ['hello','sun' ,'hi' ,'nice', 'cool', 'accompany', 'background', 'candidate', 'dialogue', 'essential', 'yesterday'];
+
+function countConson(string) { 
+    let count;
+    let regexConson = /[bcdfghjklmnpqrstvwxyz]/gi;
+    count = string.match(regexConson).length;
+    return count;
+}
 
 function sortArray (array,customSort){
 
@@ -6,64 +13,28 @@ function sortArray (array,customSort){
     let inputArraySorted = [];
 
     if (customSort == 'descending'){
-        for (let i = 0; i < inputArray.length; i++){
-            inputArraySorted[i] = inputArray.sort()[inputArray.length-i-1];
-        }
-    } else if (customSort == 'length-ascending' || customSort == 'length-descending'){
-        let counter = 1;
-        inputArraySorted[0] = inputArray[0];
-        for (let i = 1; i < inputArray.length; i++){
-            for (let j=0; j< counter; j++){
-                if (inputArray[i].length < inputArraySorted[j].length || inputArray[i].length == inputArraySorted[j].length){
-                    inputArraySorted.splice(j,0,inputArray[i]);
-                    break;
-                } 
-                else {
-                    if(j==i-1){
-                        inputArraySorted.push(inputArray[i]);
-                    }
-                }
-            }
-            counter = counter + 1;
-        }
-        if (customSort == 'length-descending'){
-            let inputArraySortedH = [];
-            for (let i = 0; i < inputArraySorted.length; i++){
-                inputArraySortedH[i] = inputArraySorted[inputArray.length-i-1];
-            }
-            return inputArraySortedH;
-        }
+        return inputArraySorted = inputArray.sort().reverse();
+    } 
+    else if (customSort == 'length-ascending'){
+        return inputArraySorted = inputArray.sort((a,b) => a.length - b.length);
+    } 
+    else if (customSort == 'length-descending'){
+        return inputArraySorted = inputArray.sort((a,b) => a.length - b.length).reverse();
+    } 
+    else if (customSort == 'consonant-ascending'){
+        return inputArraySorted = inputArray.sort((a,b) => countConson(a) - countConson(b));
     }
-    else if (customSort == 'consonant-ascending' || customSort == 'consonant-descending'){
-        let vowels =["a","e","i","o","u","A","E","I","O","U"];
-        let arrayNumbers = [];
-        inputArraySorted[0] = inputArray[0];
-        for (let i=0; i<inputArray.length ; i++){
-            let counter = 0;
-            for (let j=0; j<inputArray[i].length; j++){
-                if(vowels.indexOf(inputArray[i].toLowerCase().charAt(j))==-1){ //check to Lower Case
-                    counter = counter + 1;
-                }
-            }
-            arrayNumbers.push([counter,inputArray[i]]);
-
-        }
-        arrayNumbers.sort();
-        for (let i=0; i< arrayNumbers.length; i++){
-            inputArraySorted[i] = arrayNumbers[i][1];
-        }
-        if (customSort == 'consonant-descending'){
-            let inputArraySortedH = [];
-            for (let i = 0; i < inputArraySorted.length; i++){
-                inputArraySortedH[i] = inputArraySorted[inputArray.length-i-1];
-            }
-            return inputArraySortedH;
-        }
+    else if (customSort == 'consonant-descending'){
+        return inputArraySorted = inputArray.sort((a,b) => countConson(a) - countConson(b)).reverse();
     }
     else {
-        inputArraySorted = inputArray.sort();
+        return inputArraySorted = inputArray.sort();
     }
-    return inputArraySorted;
 }
 
+console.log(sortArray(wordsArray));
+console.log(sortArray(wordsArray,'descending'));
+console.log(sortArray(wordsArray,'length-ascending'));
+console.log(sortArray(wordsArray,'length-descending'));
+console.log(sortArray(wordsArray,'consonant-ascending'));
 console.log(sortArray(wordsArray,'consonant-descending'));
