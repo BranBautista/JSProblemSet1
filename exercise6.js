@@ -1,82 +1,73 @@
-//I decided to construct a Binary Tree
-//with the two options: add nodes and search for nodes.
+class Tree {
+    //Every children of each node will be an object 
+    //This object must remains the order insertion.
+    children = new Map(); 
+    parent = null;
+    //Wee need an identifier associated to each node and helps to the map
+    id = Math.floor(Math.random()*1000000);
+    name;
 
-class Node {
-    constructor (value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
+    constructor(name){
+        this.name = name;
+    }
+
+    set name(newName){
+        this.name = newName;
+    }
+
+    get identifier(){
+        return this.id
+    }
+
+    get children(){
+        return this.children
+    }
+
+    get parentNode(){
+        return this.parent
+    }
+
+    set parentNode(newParent){
+        this.parent = newParent;
+    }
+
+    //method to create childrens structure
+    createChildNode(name){
+        const newNode = new Tree(name);
+        this.children.set(newNode.identifier, newNode);
+        newNode.parentNode = this  
+
+        return newNode;
     }
 }
 
-class Methods {
-    constructor(){}
-    insertNode(root, node){
-        if(node.value < root.value){
-            if(root.left === null){
-                root.left = node;
-            }
-            else {
-                this.insertNode(root.left,node)
-            }
-        }
-        else {
-            if(root.right === null){
-                root.right = node;
-            }
-            else {
-                this.insertNode(root.right,node)
-            }
-        }
+const treeABC = new Tree('abc');
+
+const aNode = treeABC.createChildNode('a');
+const bNode = treeABC.createChildNode('b');
+const cNode = treeABC.createChildNode('c');
+
+const aaNode = aNode.createChildNode('aa');
+
+const ccNode = cNode.createChildNode('cc');
+
+const cccNode = ccNode.createChildNode('ccc');
+const cabNode = ccNode.createChildNode('cab');
+const cbaNode = ccNode.createChildNode('cba');
+
+function displayTree(tree){
+    let treeDisplay = tree;
+    function getString (node,spaceCount=0){
+        let str = "\n";
+        node.children.forEach((child)=>{
+            //We set blank spaces to make better tree visualization of the childrens
+            str = str + `${" ".repeat(spaceCount)}${child.name}${getString(child, spaceCount + 1)}`;
+        })
+        return str;
     }
+    return `\n${treeDisplay.name}${getString(treeDisplay,2)}`;
 }
 
-const methods = new Methods
+let structureTree = displayTree(treeABC);
 
-class BinaryTree {
-    constructor (){
-        this.root = null;
-    }
-
-    addNode(value){
-        const node = new Node (value);
-        if (this.root === null){ //Here I make sure that the root is empty
-            this.root = node;
-        } 
-        else{
-            methods.insertNode(this.root,node);
-        }
-    }
-
-    searchNode(root,node){
-        if(root == null){
-            return false;
-        }
-        else {
-            if(root.value === node){
-                return true;
-            }
-            else if (node < root.value) {
-                return this.searchNode(root.left,node);
-            }
-            else{
-                return this.searchNode(root.right,node);
-            }
-        }
-    }
-}
-
-const binaryTree = new BinaryTree();
-
-//Here I will add some nodes to the tree
-binaryTree.addNode(10);
-binaryTree.addNode(5);
-binaryTree.addNode(15);
-
-//I will display the structure of the tree
-console.log(binaryTree);
-
-
-//Here I will search for a specific node. 
-console.log(binaryTree.searchNode(binaryTree.root,25))
-console.log(binaryTree.searchNode(binaryTree.root,15))
+console.log(structureTree);
