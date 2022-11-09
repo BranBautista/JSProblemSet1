@@ -1,14 +1,22 @@
-let wordsArray = ['hello','sun' ,'hi' ,'nice', 'cool', 'accompany', 'background', 'candidate', 'dialogue', 'essential', 'yesterday'];
+let wordsArray = ['aa','b','hello','sun' ,'hi', 'e' ,'nice', 'cool', 'accompany', 'background', 'candidate', 'dialogue', 'essential', 'yesterday'];
+let regexVowels = /^[aeiou]+$/g;
 
 function countConson(string) { 
     let count;
-    let regexConson = /[bcdfghjklmnpqrstvwxyz]/gi;
-    count = string.match(regexConson).length;
+    let regexConson = /[b-df-hj-np-tv-z]/gi;
+    if(string.match(regexVowels)){
+        count = 1;
+    }
+    else{
+        count = string.match(regexConson).length;
+    }
+    
     return count;
 }
 
 function sortArray (array,customSort){
 
+    let regexVowels = /^[aeiou]+$/g;
     let inputArray = array;
     let inputArraySorted = [];
 
@@ -22,10 +30,30 @@ function sortArray (array,customSort){
         return inputArraySorted = inputArray.sort((a,b) => a.length - b.length).reverse();
     } 
     else if (customSort == 'consonant-ascending'){
-        return inputArraySorted = inputArray.sort((a,b) => countConson(a) - countConson(b));
+        let inputArraySorted = inputArray.sort((a,b) => countConson(a) - countConson(b));
+        inputArraySorted.forEach(element => {
+            if(element.match(regexVowels) != null){
+               let vowel = element;
+               let fromIndex = inputArraySorted.indexOf(vowel);
+
+               let vowel2 = inputArraySorted.splice(fromIndex,1)[0]
+               inputArraySorted.splice(0,0,vowel)
+            }
+        });
+        return inputArraySorted
     }
     else if (customSort == 'consonant-descending'){
-        return inputArraySorted = inputArray.sort((a,b) => countConson(a) - countConson(b)).reverse();
+        let inputArraySorted = inputArray.sort((a,b) => countConson(a) - countConson(b));
+        inputArraySorted.forEach(element => {
+            if(element.match(regexVowels) != null){
+               let vowel = element;
+               let fromIndex = inputArraySorted.indexOf(vowel);
+
+               let vowel2 = inputArraySorted.splice(fromIndex,1)[0]
+               inputArraySorted.splice(0,0,vowel)
+            }
+        });
+        return inputArraySorted.reverse();
     }
     else {
         return inputArraySorted = inputArray.sort();
