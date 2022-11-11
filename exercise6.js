@@ -1,30 +1,10 @@
-class Tree {
-    //Every children of each node will be an object 
-    //This object must remains the order insertion.
-    children = new Map(); 
+class Tree{
+    children = new Array();
     parent = null;
-    //Wee need an identifier associated to each node and helps to the map
-    id = Math.floor(Math.random()*1000000);
     name;
 
     constructor(name){
-        this.name = name;
-    }
-
-    set name(newName){
-        this.name = newName;
-    }
-
-    get identifier(){
-        return this.id
-    }
-
-    get children(){
-        return this.children
-    }
-
-    get parentNode(){
-        return this.parent
+        this.name = name
     }
 
     set parentNode(newParent){
@@ -34,8 +14,8 @@ class Tree {
     //method to create childrens structure
     createChildNode(name){
         const newNode = new Tree(name);
-        this.children.set(newNode.identifier, newNode);
-        newNode.parentNode = this  
+        this.children.push(newNode)
+        newNode.parentNode = this.name  
 
         return newNode;
     }
@@ -54,6 +34,13 @@ const ccNode = cNode.createChildNode('cc');
 const cccNode = ccNode.createChildNode('ccc');
 const cabNode = ccNode.createChildNode('cab');
 const cbaNode = ccNode.createChildNode('cba');
+
+const ccccNode = cccNode.createChildNode('cccc');
+
+//Here we can console.log the tree structure but it will not be visualized well
+console.log(treeABC);
+
+//In order to visualize the tree in a better way we can define the next function
 
 function displayTree(tree){
     let treeDisplay = tree;

@@ -1,26 +1,19 @@
 let counter = 0;
+let numTimes = 2;
 
 function sum (a,b){
     counter = counter + 1;
     return a + b;
 }
 
-function printHello (){
-    counter = counter + 1;
-    return "Hi, how are you?";
-}
-
-function limitFunc (fn,num,...args){
-    return function (){
-        if (counter == num) {
-            return;
-        }
-        console.log(fn(...args));
+function limitFunc (fn,...args){
+    if(counter == numTimes){
+        throw new Error ('You exceeded the execution times')
+    } else {
+        return fn(...args);
     }
 }
-
-var limited = limitFunc(sum,2,3,5);
-
-limited()
-limited()
-limited()
+ 
+limitFunc(sum,2,3)
+limitFunc(sum,4,3)
+limitFunc(sum,2,3)
