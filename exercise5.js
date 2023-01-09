@@ -1,13 +1,10 @@
 function counter(word){
-    let regexVowels = /[aeiouAEIOU]/gi;
-    let regexNumbers = /\d/
-    let numbers = ['0','1','2','3','4','5','6','7','8','9'];
+    let regexVowels = /[aeiou]/gi;
     let counter = 0;
     if (typeof word === 'number'){
         return counter = Math.floor(Math.log10(word)) + 1;
     }
     else {
-        console.log(word.match(regexVowels))
         if(!word.match(regexVowels)){
             return 0;
         }

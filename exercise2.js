@@ -1,19 +1,35 @@
-let counter = 0;
-let numTimes = 2;
-
 function sum (a,b){
-    counter = counter + 1;
     return a + b;
 }
 
-function limitFunc (fn,...args){
-    if(counter == numTimes){
-        throw new Error ('You exceeded the execution times')
-    } else {
+function sub (a,b){
+    return a - b;
+}
+
+function limitFunc (fn,times,...args){
+    let counter = 0;
+    return function () {
+    if(counter < times){
+        counter = counter + 1;
         return fn(...args);
+    } else {
+        throw new Error ('You exceeded the execution times')
+        }
     }
 }
  
-limitFunc(sum,2,3)
-limitFunc(sum,4,3)
-limitFunc(sum,2,3)
+let adding = limitFunc(sum,2,2,3);
+
+console.log(adding());
+console.log(adding());
+
+
+let substracting = limitFunc(sub,4,3,2);
+
+console.log(substracting());
+console.log(substracting());
+console.log(substracting());
+console.log(substracting());
+
+console.log(substracting());
+console.log(adding());
